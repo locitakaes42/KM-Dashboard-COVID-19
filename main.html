@@ -1,0 +1,69 @@
+<h1> KNOWLEDGE DASHBOARD COVID-19</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KNOWLEDGE DASHBOARD COVID-19</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container mt-5">
+    <h1></h1>
+    <canvas id="myChart" width="400" height="200"></canvas>
+  </div>
+
+  <script>
+    var chartData = {
+      labels: ['lpppp', 'Label 2', 'Label 3', 'Label 4', 'Label 5'],
+      datasets: [{
+        label: 'Dataset 1',
+        data: [10, 20, 15, 25, 18],
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 2,
+        fill: false
+      }]
+    };
+
+    var chartOptions = {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top'
+        }
+      }
+    };
+
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: chartData,
+      options: chartOptions
+    });
+
+  // Adding click event to the labels
+    var labels = document.getElementById('myChart').getElementsByTagName('text');
+    for (var i = 0; i < labels.length; i++) {
+      labels[i].style.cursor = 'pointer';
+      labels[i].onclick = function() {
+        window.open('https://example.com/', '_blank');
+      };
+      labels[i].textContent += ' (Link)';
+      
+    }
+  </script>
+<h1>CSV to Table</h1>
+<input type="file" id="csv-file" accept=".csv" onchange="displayCSV()" value="./top/top/1-28.csv">
+<div id="table-container"></div>
+
+<script src="script.js"></script>
+
+  
+</body>
+</html>
