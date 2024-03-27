@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#table-container {
+    margin-top: 20px;
+}
+
+#csv-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#csv-table th, #csv-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+#csv-table th {
+    background-color: #f2f2f2;
+}
+
+#csv-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#csv-table tr:hover {
+    background-color: #ddd;
+}
+
+.first-cell {
+    font-weight: bold;
+}
+
+th {
+    cursor: pointer;
+    background-color: #f2f2f2;
+  }
+  
+  th.active {
+    background-color: #dcdcdc;
+  }
+  
+  th.active.th-sort-asc::after {
+    content: "▲";
+    font-size: 0.7em;
+  }
+  
+  th.active.th-sort-desc::after {
+    content: "▼";
+    font-size: 0.7em;
+  }

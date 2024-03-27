@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <p>Word Cloud</p>
+    <div id="wordcloud-chart" style="height: 400px;"></div>
+</div>
+<script type="text/javascript">
+    var wordCloudData = {{ words|safe }}
+   
+    var chart = am4core.create("wordcloud-chart", am4plugins_wordCloud.WordCloud);
+  
+    // Set data for the chart
+    chart.data = wordCloudData;
+  
+    // Configure series
+    var series = chart.series.push(new am4plugins_wordCloud.WordCloudSeries());
+    series.dataFields.word = "word";
+    series.dataFields.value = "value";
+  
+    // Configure tooltip
+    series.labels.template.tooltipHTML = "<b>{word}</b>: {value} <br> Links:";
+  
+    // Configure appearance
+    // series.labels.template.fill = am4core.color("#000");
+    series.heatRules.push({
+        "target": series.labels.template,
+        "property": "fill",
+        "min": am4core.color("#0000CC"),
+        "max": am4core.color("#CC00CC"),
+        "dataField": "value"
+    });
+       
+    series.labels.template.fontSize = 12;
+  
+    // Add custom links to each word
+   
+  
+    // Add links dynamically to the tooltip
+    series.events.on("ready", function (ev) {
+        for (var i in wordCloudData) {
+          var links = wordCloudData[i].links.map(function (link, index) {
+            return '<a href="' + link + '" target="_blank">' + wordCloudData[i].titles[index] + '</a>';
+          });
+          series.dataItems.getIndex(i).label.tooltipHTML += "<br>" + links.join("<br>");
+        }
+    });
+    
+  </script>
+  
+  
+{% endblock %}
